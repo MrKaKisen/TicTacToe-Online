@@ -131,7 +131,7 @@ def returnButton(msg, x, y, w, h, iColor, aColor):
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y+h > mouse[1] > y:
                 pygame.draw.rect(gameDisplay, aColor, (x,y,w,h))
-                if click[0] == 1
+                if click[0] == 1:
 			return True
                                 
         else:
