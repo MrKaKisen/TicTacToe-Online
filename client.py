@@ -125,6 +125,24 @@ def button(msg, x, y, w, h, iColor, aColor, action=None):
         textSurf, textRect = text_objects(msg, smallText)
         textRect.center = ( (x+(w/2)), (y+(h/2)))
         gameDisplay.blit(textSurf, textRect)
+	
+def returnButton(msg, x, y, w, h, iColor, aColor):
+	mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if x + w > mouse[0] > x and y+h > mouse[1] > y:
+                pygame.draw.rect(gameDisplay, aColor, (x,y,w,h))
+                if click[0] == 1
+			return True
+                                
+        else:
+                pygame.draw.rect(gameDisplay, iColor, (x,y,w,h))
+
+        smallText = pygame.font.Font("game/freesansbold.ttf", 20)
+        textSurf, textRect = text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)))
+        gameDisplay.blit(textSurf, textRect)
+	
+	return False
 
 def clickSquare():
         mouse = pygame.mouse.get_pos()
@@ -488,9 +506,13 @@ def createSessionLoop():
                         if event.type == pygame.QUIT:
                                 quit_code()
                 gameDisplay.fill(white)
+		buttonStatus = returnButton("Return to main menu", 20,20,400,50, red, red2)
                 message_display("Ask your game partner to enter code " + newSession, 20, display_width/2, display_height/2)
                 pygame.display.update()
                 clock.tick(60)
+		
+		if (buttonStatus == True):
+			exitSessionLoop = True
 
                 connectTime = connectTime+1
                 if (connectTime == 120):
@@ -801,6 +823,12 @@ def joinSessionLoop():
                 message_display("____________________", 20, display_width/2, display_height/2+40)
                 allLetters = letter[1] + letter[2] + letter[3] + letter[4] + letter[5] + letter[6]
                 message_display(allLetters, 20, display_width/2, display_height/2+32)
+		
+		# return button
+		buttonStatus = returnButton("Return to main menu", 20,20,400,50, red, red2)
+		if (buttonStatus == True):
+			exitSessionLoop = True
+		
                 # if not found
                 if (timerOn == True):
                         timer = timer+1
