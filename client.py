@@ -54,7 +54,7 @@ pygame.init()
 display_width = 1280
 display_height = 720
 
-version = "a1.2.1-dev"
+version = "a1.2.1"
 #mainServerAddr = ("removed - please use the compiled client")
 
 # sq pos
