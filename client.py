@@ -15,7 +15,7 @@ print("Debug information will be printed in this console.")
 print(" ")
 global debug
 debug = 0
-ingame_fps = 60
+global_fps = 30
 
 from sys import version_info
 py3 = version_info[0] > 2
@@ -110,7 +110,7 @@ def text_objects(text, font):
 def updateDisplay(bgColor):
         gameDisplay.fill(bgColor)
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(global_fps)
 def button(msg, x, y, w, h, iColor, aColor, action=None):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -251,7 +251,7 @@ def mainMenu():
                 message_display("Tic Tac Toe Online", 72, display_width/2-100, display_height/2-100)
 
                 pygame.display.update()
-                clock.tick(60)
+                clock.tick(global_fps)
 
                 f = open("tmp_gl_quitMainMenu.tmp", "r")
                 if (f.read() == "True"):
@@ -454,7 +454,7 @@ def gameLoop():
 
                 # update the screen
                 pygame.display.update()
-                clock.tick(ingame_fps)
+                clock.tick(global_fps)
 
                 connectTick = connectTick+1
                 if (connectTick == 60):
@@ -489,7 +489,7 @@ def gameLoop():
                                                 message_display("Error! Did nobody win?", 72, display_width/2-100, display_height/2-100)
 
                                         pygame.display.update()
-                                        clock.tick(ingame_fps)
+                                        clock.tick(global_fps)
 
                                         if (quitTick == 180):
                                                 winLoop = True
@@ -511,7 +511,7 @@ def createSessionLoop():
                 buttonStatus = returnButton("Return to main menu", 20,20,400,50, red, red2)
                 message_display("Ask your game partner to enter code " + newSession, 20, display_width/2, display_height/2)
                 pygame.display.update()
-                clock.tick(60)
+                clock.tick(global_fps)
 
                 if (buttonStatus == True):
                         exitSessionLoop = True
@@ -843,7 +843,7 @@ def joinSessionLoop():
                                 timerOn = False
 
                 pygame.display.update()
-                clock.tick(60)
+                clock.tick(global_fps)
 
 quitEndlessMain = False
 while quitEndlessMain is False:
