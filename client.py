@@ -54,7 +54,7 @@ pygame.init()
 display_width = 1280
 display_height = 720
 
-version = "a1.2.1"
+version = "a1.3-dev"
 #mainServerAddr = ("removed - please use the compiled client")
 
 # sq pos
@@ -119,7 +119,7 @@ def button(msg, x, y, w, h, iColor, aColor, action=None):
                 if click[0] == 1 and action != None:
                         #sloopy, not good :/
                         action()
-                                
+
         else:
                 pygame.draw.rect(gameDisplay, iColor, (x,y,w,h))
 
@@ -127,7 +127,7 @@ def button(msg, x, y, w, h, iColor, aColor, action=None):
         textSurf, textRect = text_objects(msg, smallText)
         textRect.center = ( (x+(w/2)), (y+(h/2)))
         gameDisplay.blit(textSurf, textRect)
-	
+
 def returnButton(msg, x, y, w, h, iColor, aColor):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -135,15 +135,15 @@ def returnButton(msg, x, y, w, h, iColor, aColor):
                 pygame.draw.rect(gameDisplay, aColor, (x,y,w,h))
                 if click[0] == 1:
                         return True
-                
+
         else:
                 pygame.draw.rect(gameDisplay, iColor, (x,y,w,h))
-        
+
         smallText = pygame.font.Font("game/freesansbold.ttf", 20)
         textSurf, textRect = text_objects(msg, smallText)
         textRect.center = ( (x+(w/2)), (y+(h/2)))
         gameDisplay.blit(textSurf, textRect)
-	
+
         return False
 
 def clickSquare():
@@ -212,7 +212,7 @@ else:
         print("FATAL ERROR: " + errMsg[3])
         import time
         time.sleep(5)
-        quit(0)   
+        quit(0)
 
 # load images / assets
 print("Loading assets..")
@@ -244,15 +244,15 @@ def mainMenu():
                                 if event.key == pygame.K_LEFT:
                                         exitMainMenu = True
                 gameDisplay.fill(white)
-                
+
                 button("Join Session", display_width/2-100,display_height/2,400,50, red, red2, joinSessionLoop)
                 button("Create Session", display_width/2-100,display_height/2+100,400,50, green, green2, createSessionLoop)
 
                 message_display("Tic Tac Toe Online", 72, display_width/2-100, display_height/2-100)
-                
+
                 pygame.display.update()
                 clock.tick(60)
-                
+
                 f = open("tmp_gl_quitMainMenu.tmp", "r")
                 if (f.read() == "True"):
                         f.close()
@@ -263,7 +263,7 @@ def mainMenu():
                         print("Shouldn't be in main menu. Quitting to game loop!")
                 else:
                         f.close()
-                
+
 
 # main game loop
 def gameLoop():
@@ -294,7 +294,7 @@ def gameLoop():
                 f = open("tmp_session.tmp", "r")
                 session = f.read()
                 f.close()
-                
+
                 PlayerIsP2 = True
 
                 print("Fetching gamedata once - P2")
@@ -442,7 +442,7 @@ def gameLoop():
                                 message_display("Your turn!", 32, 780, 40)
                         else:
                                 message_display("Opponents turn!", 32, 780, 40)
-                                
+
 
                 elif (PlayerIsP2 == True):
                         gameDisplay.blit(circleImage, (720,80))
@@ -512,7 +512,7 @@ def createSessionLoop():
                 message_display("Ask your game partner to enter code " + newSession, 20, display_width/2, display_height/2)
                 pygame.display.update()
                 clock.tick(60)
-		
+
                 if (buttonStatus == True):
                         exitSessionLoop = True
                         if (mainServer.clientDelete(newSession) == "success"):
@@ -538,7 +538,7 @@ def createSessionLoop():
                                 f = open("tmp_playerState.tmp", "w")
                                 f.write("P1")
                                 f.close()
-                                
+
                                 exitSessionLoop = True
                                 gl_quitMainMenu = True
                         else:
@@ -558,7 +558,7 @@ def joinSessionLoop():
         letter.append("")
         letter.append("")
         currentLetter = 1
-        
+
         exitSessionLoop = False
         while exitSessionLoop is False:
                 for event in pygame.event.get():
@@ -823,18 +823,18 @@ def joinSessionLoop():
                                                         timer = 0
                                         else:
                                                 print("not all filled")
-                                
+
                 gameDisplay.fill(white)
                 message_display("Enter session below", 20, display_width/2, display_height/2)
                 message_display("____________________", 20, display_width/2, display_height/2+40)
                 allLetters = letter[1] + letter[2] + letter[3] + letter[4] + letter[5] + letter[6]
                 message_display(allLetters, 20, display_width/2, display_height/2+32)
-		
+
 		# return button
                 buttonStatus = returnButton("Return to main menu", 20,20,400,50, red, red2)
                 if (buttonStatus == True):
                         exitSessionLoop = True
-		
+
                 # if not found
                 if (timerOn == True):
                         timer = timer+1
