@@ -54,7 +54,7 @@ pygame.init()
 display_width = 1280
 display_height = 720
 
-version = "a1.2"
+version = "a1.2.1-dev"
 #mainServerAddr = ("removed - please use the compiled client")
 
 # sq pos
@@ -515,6 +515,10 @@ def createSessionLoop():
 		
                 if (buttonStatus == True):
                         exitSessionLoop = True
+                        if (mainServer.clientDelete(newSession) == "success"):
+                                print("Session deleted.")
+                        else:
+                                print("Error deleting session.")
 
                 connectTime = connectTime+1
                 if (connectTime == 120):
