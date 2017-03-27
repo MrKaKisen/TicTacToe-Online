@@ -1,0 +1,8 @@
+Package: TicTacToe
+Version: 1.2.1-1
+Section: base
+Priority: optional
+Architecture: amd64
+Maintainer: Vilhelm Prytz <contact@mrkakisen.net>
+Description: TicTacToe Online
+ Simple TicTacToe game made in Python.
