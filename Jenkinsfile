@@ -4,8 +4,6 @@ pipeline {
     stages {
         stage("Buildenv") {
             steps {
-                echo "Cleanup.."
-                sh "rm * -rf"
                 echo "Building build env.."
                 sh "virtualenv python"
                 sh "python/bin/pip install pyinstaller"
@@ -21,6 +19,8 @@ pipeline {
             steps {
                 echo "Building artifacts.."
                 archiveArtifacts artifacts: '*', fingerprint: true
+                echo "Cleanup.."
+                sh "rm * -rf"
             }
         }
     }
