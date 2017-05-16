@@ -6,13 +6,13 @@ pipeline {
             steps {
                 echo "Building build env.."
                 sh "virtualenv python"
-                sh "python/bin/pip install py2exe"
+                sh "python/bin/pip install pyinstaller"
             }
         }
         stage("Build") {
             steps {
                 echo "Building TicTacToe.."
-                sh "python/bin/python setup.py py2exe"
+                sh "python/bin/pyinstaller client.py"
             }
         }
     }
