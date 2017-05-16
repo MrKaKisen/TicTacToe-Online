@@ -15,5 +15,11 @@ pipeline {
                 sh "python/bin/pyinstaller client.py"
             }
         }
+        stage("Archive") {
+            steps {
+                echo "Building artifacts.."
+                archiveArtifacts artifacts: '*', fingerprint: true
+            }
+        }
     }
 }
