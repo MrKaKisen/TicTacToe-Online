@@ -18,7 +18,7 @@ pipeline {
         stage("Archive") {
             steps {
                 echo "Building artifacts.."
-                archiveArtifacts artifacts: '*', fingerprint: true
+                archiveArtifacts artifacts: 'dist/*', fingerprint: true
                 echo "Cleanup.."
                 sh "rm * -rf"
             }
