@@ -18,9 +18,10 @@ pipeline {
         stage("Archive") {
             steps {
                 echo "Building artifacts.."
+                sh "mv game dist/game -R"
                 archiveArtifacts artifacts: 'dist/*', fingerprint: true
                 echo "Cleanup.."
-                sh "rm * -rf"
+                sh "rm Jenkinsfile LICENSE README.md build client.py client.spec python -rf"
             }
         }
     }
