@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    deleteDir()
 
     stages {
         stage("Buildenv") {
