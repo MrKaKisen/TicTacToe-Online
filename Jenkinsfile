@@ -14,7 +14,8 @@ pipeline {
                 sh "virtualenv python"
                 sh "python/bin/pip install pyinstaller"
                 sh "python/bin/pip install pygame"
-                sh "python/bin/python replace.py $Server-TicTacToe-Online"
+                sh "echo ${Server-TicTacToe-Online} >> temp.temp"
+                sh "python/bin/python replace.py"
             }
         }
         stage("Build") {
