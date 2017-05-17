@@ -13,6 +13,7 @@ pipeline {
                 echo "Building build env.."
                 sh "virtualenv python"
                 sh "python/bin/pip install pyinstaller"
+                sh "python/bin/pip install pygame"
             }
         }
         stage("Build") {
