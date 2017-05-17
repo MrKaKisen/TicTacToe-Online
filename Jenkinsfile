@@ -3,9 +3,6 @@ pipeline {
     stages {
         stage("Clean") {
             steps {
-                /* bad way to get commit id :) */
-                sh "git rev-parse --short HEAD > .git/commit-id"
-                commit_id = readFile('.git/commit-id')
                 echo "cleaning.."
                 sh "rm * -rf"
                 checkout scm
@@ -27,8 +24,8 @@ pipeline {
         stage("Archive") {
             steps {
                 echo "Building artifacts.."
-                sh "mv dist/client dist/TicTacToe-Online-${commit_id}"
-                archiveArtifacts artifacts: 'dist/TicTacToe-Online-${commit_id', fingerprint: true
+                sh "mv dist/client dist/TicTacToe-Online-${BUILD_NUMBER}"
+                archiveArtifacts artifacts: 'dist/TicTacToe-Online-${BUILD_NUMBER}', fingerprint: true
                 echo "Cleanup.."
                 sh "rm * -rf"
             }
