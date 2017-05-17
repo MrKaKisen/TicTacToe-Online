@@ -1,8 +1,15 @@
 pipeline {
     agent any
-    deleteDir()
+
 
     stages {
+        stage("Clean") {
+            steps {
+                echo "cleaning.."
+                sh "rm * -rf"
+                checkout scm
+            }
+        }
         stage("Buildenv") {
             steps {
                 echo "Building build env.."
